@@ -1,24 +1,45 @@
-import logo from './logo.svg';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ThemeProvider, createTheme } from '@mui/material';
+import CssBaseline from '@mui/material/CssBaseline';
+import Navbar from './components/Navbar';
+import LandingPage from './pages/LandingPage';
+import Dashboard from './pages/Dashboard';
 import './App.css';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#1a73e8',
+    },
+    secondary: {
+      main: '#4caf50',
+    },
+    background: {
+      default: '#f5f5f5',
+    },
+  },
+  typography: {
+    h4: {
+      fontWeight: 600,
+    },
+    h5: {
+      fontWeight: 500,
+    },
+  },
+});
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Routes>
+      </Router>
+    </ThemeProvider>
   );
 }
 
